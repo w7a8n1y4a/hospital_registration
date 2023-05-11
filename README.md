@@ -9,6 +9,6 @@
 ### Build docker
 `docker build -t hospital-registration . --file Dockerfile`
 
-### For update models into alembic:  
+### For add models into alembic:  
 1. go to /alembic/env.py
 2. import models after 34 line
