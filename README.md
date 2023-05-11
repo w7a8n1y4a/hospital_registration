@@ -6,6 +6,8 @@
 ### Run project
 `uvicorn app.main:app --reload`
 
+### Build docker
+`docker build -t hospital-registration . --file Dockerfile`
 
 ### For update models into alembic:  
 1. go to /alembic/env.py
