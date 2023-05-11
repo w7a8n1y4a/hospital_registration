@@ -11,3 +11,6 @@ class Settings(BaseSettings):
 
     # Database
     database_url: str
+
+    # soap
+    wsdl_url: str
