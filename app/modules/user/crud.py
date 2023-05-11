@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException, status
 from sqlmodel import Session
 
 from app.core.db import get_session
-from app.modules.users.models import User, UserCreate, UserUpdate
+from app.modules.user.models import User, UserCreate, UserUpdate
 
 
 def get(

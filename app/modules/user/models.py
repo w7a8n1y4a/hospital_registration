@@ -6,7 +6,7 @@ from sqlalchemy import event, Column
 from sqlalchemy.databases import postgres
 from sqlmodel import SQLModel, Field
 
-from app.modules.users.examples import ex_user_read, ex_user_create
+from app.modules.user.examples import ex_user_read, ex_user_create
 
 genders = postgres.ENUM("MALE", "FEMALE", name="genders")
 

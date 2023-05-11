@@ -3,8 +3,8 @@ from sqlmodel import Session
 from starlette.status import HTTP_200_OK
 
 from app.core.db import get_session
-from app.modules.users import crud
-from app.modules.users.models import UserRead, UserCreate, UserUpdate
+from app.modules.user import crud
+from app.modules.user.models import UserRead, UserCreate, UserUpdate
 
 router = APIRouter()
 
@@ -25,7 +25,7 @@ def create_user(
     return crud.create(data, session)
 
 
-@router.post("", response_model=UserRead, status_code=HTTP_200_OK)
+@router.patch("", response_model=UserRead, status_code=HTTP_200_OK)
 def update_user(
         data: UserUpdate,
         session: Session = Depends(get_session)
@@ -33,7 +33,7 @@ def update_user(
     return crud.update(data, session)
 
 
-@router.post("", response_model=bool, status_code=HTTP_200_OK)
+@router.delete("", response_model=bool, status_code=HTTP_200_OK)
 def delete_user(
         user_id: int,
         session: Session = Depends(get_session)
