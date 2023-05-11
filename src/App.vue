@@ -1,6 +1,8 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-app-bar title="BALANCEV GANDON" app>
+    </v-app-bar>
+  </v-app>
 </template>
 
 <script>
