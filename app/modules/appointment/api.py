@@ -10,7 +10,7 @@ router = APIRouter()
 
 
 @router.get("", response_model=AppointmentRead, status_code=HTTP_200_OK)
-def create_user(
+def get_appointment(
         appointment_id: int,
         session: Session = Depends(get_session)
 ):
@@ -18,7 +18,7 @@ def create_user(
 
 
 @router.post("", response_model=AppointmentRead, status_code=HTTP_200_OK)
-def registrate(
+def create_appointment(
         data: AppointmentCreate,
         session: Session = Depends(get_session)
 ):

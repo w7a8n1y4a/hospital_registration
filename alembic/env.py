@@ -32,6 +32,7 @@ if config.config_file_name is not None:
 # target_metadata = None
 
 from app.modules.user.models import User  # noqa: 'autogenerate' support
+from app.modules.appointment.models import Appointment  # noqa
 
 target_metadata = SQLModel.metadata
 

@@ -18,7 +18,7 @@ class AppointmentBase(SQLModel):
 
 
 class Appointment(AppointmentBase, table=True):
-    __tablename__ = "users"
+    __tablename__ = "appointments"
 
 
 class AppointmentRead(AppointmentBase):
