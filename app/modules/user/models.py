@@ -40,11 +40,11 @@ class UserRead(UserBase):
 
 
 class UserCreate(BaseModel):
-    first_name: str = Field(max_length=255, nullable=False)
-    second_name: str = Field(max_length=255, nullable=False)
-    patronymic: str = Field(max_length=255, nullable=False)
-    date_of_birth: datetime = Field(nullable=False)
-    gender: str = Field(sa_column=Column("gender", genders, nullable=False))
+    first_name: str
+    second_name: str
+    patronymic: str
+    date_of_birth: datetime
+    gender: str
 
     class Config:
         use_enum_values = True
