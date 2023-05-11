@@ -2,6 +2,7 @@ from fastapi import Depends, HTTPException, status
 from sqlmodel import Session
 
 from app.core.db import get_session
+from app.modules.appointment import api_services
 from app.modules.appointment.models import Appointment, AppointmentCreate
 
 
@@ -27,6 +28,10 @@ def create(
     values = data.dict()
     appointment = Appointment(**values)
     db.add(appointment)
+
+    # todo: add api call
+    api_services.create_appointment(appointment)
+
     db.commit()
     db.refresh(appointment)
 
