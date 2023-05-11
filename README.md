@@ -3,6 +3,9 @@
 2. `poetry install`  
 3. `poetry update`
 
+### Run migrations
+`alembic upgrade head`
+
 ### Run project
 `uvicorn app.main:app --reload`
 
