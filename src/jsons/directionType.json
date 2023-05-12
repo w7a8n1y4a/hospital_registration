@@ -1,0 +1,155 @@
+{
+  "items": [
+    {
+      "system": "1.2.643.2.69.1.1.1.55",
+      "item_code": "1",
+      "attributes": {
+        "code": "1",
+        "GROUP": "Госпитализация",
+        "display": "На госпитализацию"
+      }
+    },
+    {
+      "system": "1.2.643.2.69.1.1.1.55",
+      "item_code": "2",
+      "attributes": {
+        "code": "2",
+        "GROUP": null,
+        "display": "На восстановительное лечение"
+      }
+    },
+    {
+      "system": "1.2.643.2.69.1.1.1.55",
+      "item_code": "3",
+      "attributes": {
+        "code": "3",
+        "GROUP": "Исследование",
+        "display": "На обследование"
+      }
+    },
+    {
+      "system": "1.2.643.2.69.1.1.1.55",
+      "item_code": "4",
+      "attributes": {
+        "code": "4",
+        "GROUP": "Консультация",
+        "display": "На консультацию"
+      }
+    }
+  ],
+  "system": "1.2.643.2.69.1.1.1.55",
+  "version": "1.0.0.81",
+  "attributes": [
+    {
+      "ord": "1",
+      "code": "code",
+      "guid": "code",
+      "mask": null,
+      "name": "Код",
+      "descr": "",
+      "regex": null,
+      "search": "0",
+      "system": "1.2.643.2.69.1.1.1.55",
+      "vallen": "255",
+      "att_vid": "1",
+      "privacy": "0",
+      "edit_type": "7",
+      "mandatory": "1",
+      "use_claim": "0",
+      "generation": "",
+      "code_prefix": "",
+      "inheritance": "0",
+      "placeholder": null,
+      "regexp_info": null,
+      "showbydefault": "1",
+      "text_use_memo": "0",
+      "use_code_as_guid": "true",
+      "change_dict_version": "0"
+    },
+    {
+      "ord": "2",
+      "code": "display",
+      "guid": "display",
+      "mask": null,
+      "name": "Наименование",
+      "descr": "",
+      "regex": null,
+      "search": "0",
+      "system": "1.2.643.2.69.1.1.1.55",
+      "vallen": "255",
+      "att_vid": "1",
+      "privacy": "0",
+      "edit_type": "7",
+      "mandatory": "1",
+      "use_claim": "0",
+      "generation": "",
+      "inheritance": "0",
+      "placeholder": null,
+      "regexp_info": null,
+      "showbydefault": "1",
+      "text_use_memo": "0",
+      "use_code_as_guid": "true",
+      "change_dict_version": "0"
+    },
+    {
+      "ord": "3",
+      "code": "GROUP",
+      "guid": "GROUP",
+      "mask": null,
+      "name": "GROUP",
+      "descr": "",
+      "regex": null,
+      "search": "0",
+      "system": "1.2.643.2.69.1.1.1.55",
+      "vallen": "4000",
+      "att_vid": "1",
+      "privacy": "0",
+      "edit_type": "1",
+      "mandatory": "0",
+      "use_claim": "0",
+      "generation": "",
+      "inheritance": "0",
+      "placeholder": null,
+      "regexp_info": null,
+      "showbydefault": "0",
+      "text_use_memo": "0",
+      "use_code_as_guid": "true",
+      "change_dict_version": "0"
+    }
+  ],
+  "dictionary": {
+    "code": [
+      "1.2.643.2.69.1.1.1.55"
+    ],
+    "guid": "75833ddc-7b8d-4277-be2d-49b08ddddc9a",
+    "name": "Тип направления",
+    "descr": null,
+    "email": "netrika@yandex.ru",
+    "privacy": 0,
+    "sysname": "uo_referral_type",
+    "version": 1,
+    "use_guid": 0,
+    "publisher": "Netrika",
+    "lastupdate": "2022-04-06T11:38:55.142304+00:00",
+    "versioning": 1,
+    "edit_status": 0,
+    "has_hierarchy": 0,
+    "dictionary_type": 3,
+    "version_comment": "",
+    "dictionary_group": [
+      2
+    ],
+    "use_code_as_guid": 1,
+    "versioning_method": 0,
+    "modification_model": 0
+  },
+  "json_formatter": {
+    "Корневой узел": {
+      "code": "00",
+      "listing_type": "comma"
+    }
+  },
+  "dictionary_group_relations": [
+    "02"
+  ]
+}
