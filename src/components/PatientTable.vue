@@ -1,52 +1,54 @@
 <template>
-  <v-table>
-    <thead>
-    <tr>
-      <th>
-        ФИО
-      </th>
-      <th>
-        Дата рождения
-      </th>
-      <th>
-        Пол
-      </th>
-      <th>
-        Телефон
-      </th>
-      <th>
-        Снилс
-      </th>
-      <th>
-        <create-patient-dialog/>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr
-        v-for="item in patients"
-        :key="item.id"
-    >
-      <td class="text-left">{{ item.fullName }}</td>
-      <td class="text-left">{{ item.birthDay }}</td>
-      <td class="text-left">{{ item.gender }}</td>
-      <td class="text-left">{{ item.telephone }}</td>
-      <td class="text-left">{{ item.snils }}</td>
-      <td class="text-left" style="display: flex">
-        <patient-delete>
-        </patient-delete>
-        <patient-redact
-            action-type="DELETE"
-            @deletePatient="deletePatient"
-            :patient="item">
-          >
-        </patient-redact>
-        <patient-register>
-        </patient-register>
-      </td>
-    </tr>
-    </tbody>
-  </v-table>
+  <v-container>
+    <v-table>
+      <thead>
+      <tr>
+        <th>
+          ФИО
+        </th>
+        <th>
+          Дата рождения
+        </th>
+        <th>
+          Пол
+        </th>
+        <th>
+          Телефон
+        </th>
+        <th>
+          Снилс
+        </th>
+        <th>
+          <create-patient-dialog/>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+          v-for="item in patients"
+          :key="item.id"
+      >
+        <td class="text-left">{{ item.fullName }}</td>
+        <td class="text-left">{{ item.birthDay }}</td>
+        <td class="text-left">{{ item.gender }}</td>
+        <td class="text-left">{{ item.telephone }}</td>
+        <td class="text-left">{{ item.snils }}</td>
+        <td class="text-left" style="display: flex">
+          <patient-delete>
+          </patient-delete>
+          <patient-redact
+              action-type="DELETE"
+              @deletePatient="deletePatient"
+              :patient="item">
+            >
+          </patient-redact>
+          <patient-register>
+          </patient-register>
+        </td>
+      </tr>
+      </tbody>
+    </v-table>
+  </v-container>
 </template>
 
 <script>
