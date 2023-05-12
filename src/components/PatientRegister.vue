@@ -136,7 +136,7 @@ export default {
     isValid() {
       return this.comment.length === 0
     }
-  }
+  },
 }
 </script>
 

@@ -32,14 +32,18 @@
 <script>
 export default {
   name: "PatientDelete",
+  props: {
+    id: Number
+  },
   data() {
     return {
       dialog: false,
     }
   },
   methods: {
-    deletePatient() {
-      
+    async deletePatient() {
+      await this.$emit('deletePatient', this.id)
+      this.dialog = false
     }
   }
 }
