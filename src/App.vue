@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar title="wsdl-app" app/>
+    <v-app-bar title="Hospital Registration" app/>
     <patient-table></patient-table>
   </v-app>
 </template>
