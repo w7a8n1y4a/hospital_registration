@@ -29,6 +29,8 @@ class UserBase(SQLModel):
     patronymic: str = Field(max_length=255, nullable=False)
     date_of_birth: date = Field(nullable=False)
     gender: str = Field(sa_column=Column("gender", genders, nullable=False))
+    snils: str = Field(max_length=30, nullable=False)
+    telephone: str = Field(max_length=20, nullable=False)
 
 
 class User(UserBase, table=True):
@@ -46,6 +48,8 @@ class UserCreate(BaseModel):
     patronymic: str
     date_of_birth: date
     gender: str
+    snils: str
+    telephone: str
 
     class Config:
         use_enum_values = True

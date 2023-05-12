@@ -4,7 +4,9 @@ ex_user_read = {
     "second_name": "Doe",
     "patronymic": "Petrovich",
     "date_of_birth": "2021-09-01",
-    "gender": "Муж."
+    "gender": "Муж.",
+    "snils": "12312-23123-123-23",
+    "telephone": "+79115710137"
 }
 
 ex_user_create = {
@@ -12,5 +14,7 @@ ex_user_create = {
     "second_name": "Doe",
     "patronymic": "Petrovich",
     "date_of_birth": "2021-09-01",
-    "gender": "Муж."
+    "gender": "Муж.",
+    "snils": "12312-23123-123-23",
+    "telephone": "+79115710137"
 }
