@@ -10,7 +10,7 @@
         </div>
       </template>
 
-      <v-card>
+      <v-card style="width: 50vw">
         <v-card-title>
           Редактирование данных пациента
         </v-card-title>

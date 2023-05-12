@@ -67,7 +67,7 @@
           </v-select>
         </v-card-item>
         <v-card-actions>
-          <v-btn @click="register">Регистрация</v-btn>
+          <v-btn border class="grey-darken-1"  @click="register">Регистрация</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

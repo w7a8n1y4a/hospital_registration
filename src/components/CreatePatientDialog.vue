@@ -9,7 +9,7 @@
           <v-btn v-bind="props" density="compact" icon="mdi-plus"></v-btn>
         </div>
       </template>
-      <v-card>
+      <v-card style="width: 50vw">
         <v-card-title>
           Создать пользователя
         </v-card-title>
@@ -24,7 +24,7 @@
           <v-text-field label="Снилс" v-model="localData.snils"></v-text-field>
         </v-card-item>
         <v-card-actions>
-          <v-btn @click="createPatient">Создать пациента</v-btn>
+          <v-btn border @click="createPatient">Создать пациента</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

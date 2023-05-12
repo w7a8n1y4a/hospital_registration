@@ -33,19 +33,15 @@
       <td class="text-left">{{ item.telephone }}</td>
       <td class="text-left">{{ item.snils }}</td>
       <td class="text-left" style="display: flex">
+        <patient-delete>
+        </patient-delete>
         <patient-redact
             action-type="DELETE"
             @deletePatient="deletePatient"
             :patient="item">
           >
         </patient-redact>
-<!--        <patient-dialog-->
-<!--            action-type="EDIT"-->
-<!--            @changePatientData="changePatientData"-->
-<!--            :patient="item">-->
-<!--        </patient-dialog>-->
         <patient-register>
-
         </patient-register>
       </td>
     </tr>
@@ -57,10 +53,11 @@
 import PatientRedact from "@/components/PatientRedact";
 import CreatePatientDialog from "@/components/CreatePatientDialog";
 import PatientRegister from "@/components/PatientRegister";
+import PatientDelete from "@/components/PatientDelete";
 
 export default {
   name: "PatientTable",
-  components: {PatientRegister, PatientRedact, CreatePatientDialog},
+  components: {PatientRegister, PatientRedact, CreatePatientDialog, PatientDelete},
   data() {
     return {
       patients: [
