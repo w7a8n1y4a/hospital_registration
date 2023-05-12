@@ -17,7 +17,7 @@ export class HttpService {
     }
 
     async deletePatient(patientId) {
-        return await axios.delete(this.baseUrl + `users/${patientId}`)
+        return await axios.delete(this.baseUrl + `users?user_id=${patientId}`)
     }
 }
 
