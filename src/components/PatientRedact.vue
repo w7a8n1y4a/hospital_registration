@@ -100,7 +100,7 @@ export default {
       if (this.notValid) {
         return;
       }
-      await this.$emit('updatePatient')
+      await this.$emit('updatePatient', this.localData)
       this.dialog = false
     }
   },
