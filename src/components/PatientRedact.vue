@@ -96,10 +96,12 @@ export default {
     }
   },
   methods: {
-    changeData() {
+    async changeData() {
       if (this.notValid) {
         return;
       }
+      await this.$emit('updatePatient')
+      this.dialog = false
     }
   },
   computed: {

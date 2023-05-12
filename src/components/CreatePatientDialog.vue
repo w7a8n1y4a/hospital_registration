@@ -81,9 +81,7 @@ export default {
     async createPatient() {
       if (this.notValid) return
 
-      await httpService.createUser(this.localData);
-
-      await this.$emit('getPatients')
+      await this.$emit('createPatient', this.localData)
       
       this.dialog = false;
     }

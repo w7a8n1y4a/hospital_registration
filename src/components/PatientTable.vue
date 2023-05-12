@@ -26,7 +26,7 @@
         </th>
         <th>
           <create-patient-dialog
-              @getPatients="getPatients"
+              @createPatient="createPatient"
           />
         </th>
       </tr>
@@ -75,6 +75,10 @@ export default {
   methods: {
     async getPatients() {
       this.patients = await httpService.getUsers()
+    },
+    async createPatient(patient) {
+      await httpService.createUser(patient)
+      await this.getPatients();
     },
     async deletePatient(id) {
       await httpService.deletePatient(id)
