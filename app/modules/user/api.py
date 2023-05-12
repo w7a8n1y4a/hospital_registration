@@ -39,3 +39,10 @@ def delete_user(
         session: Session = Depends(get_session)
 ):
     return crud.delete(user_id, session)
+
+
+@router.get("/all", response_model=list[UserRead], status_code=HTTP_200_OK)
+def get_users(
+        session: Session = Depends(get_session)
+):
+    return crud.get_all(session)

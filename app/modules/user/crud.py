@@ -1,5 +1,5 @@
 from fastapi import Depends, HTTPException, status
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from app.core.db import get_session
 from app.modules.user.models import User, UserCreate, UserUpdate
@@ -72,3 +72,9 @@ def delete(
     db.commit()
 
     return True
+
+
+def get_all(
+        db: Session = Depends(get_session)
+) -> list[User]:
+    return db.exec(select(User)).all()
