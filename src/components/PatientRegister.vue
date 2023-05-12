@@ -42,6 +42,9 @@
               maxlength="120"
               single-line
           ></v-textarea>
+          <div class="bg-red text-center" v-if="comment.length === 0">
+            <span>Необходимо заполнить поле</span>
+          </div>
         </v-card-item>
         <v-card-item>
           <v-select
@@ -125,7 +128,8 @@ export default {
   },
   methods: {
     register() {
-
+      if (this.comment.length === 0)
+        return;
     }
   }
 }

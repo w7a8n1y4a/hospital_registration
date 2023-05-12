@@ -33,19 +33,19 @@
       <td class="text-left">{{ item.telephone }}</td>
       <td class="text-left">{{ item.snils }}</td>
       <td class="text-left" style="display: flex">
-        <patient-dialog
+        <patient-redact
             action-type="DELETE"
             @deletePatient="deletePatient"
             :patient="item">
           >
-        </patient-dialog>
-        <patient-dialog
-            action-type="EDIT"
-            @changePatientData="changePatientData"
-            :patient="item">
-        </patient-dialog>
+        </patient-redact>
+<!--        <patient-dialog-->
+<!--            action-type="EDIT"-->
+<!--            @changePatientData="changePatientData"-->
+<!--            :patient="item">-->
+<!--        </patient-dialog>-->
         <patient-register>
-          
+
         </patient-register>
       </td>
     </tr>
@@ -54,20 +54,20 @@
 </template>
 
 <script>
-import PatientDialog from "@/components/PatientDialog";
+import PatientRedact from "@/components/PatientRedact";
 import CreatePatientDialog from "@/components/CreatePatientDialog";
 import PatientRegister from "@/components/PatientRegister";
 
 export default {
   name: "PatientTable",
-  components: {PatientRegister, PatientDialog, CreatePatientDialog},
+  components: {PatientRegister, PatientRedact, CreatePatientDialog},
   data() {
     return {
       patients: [
         {
           id: 1,
           fullName: 'Кал калыч',
-          birthDay: '15.05.2000',
+          birthDay: '2023-05-01',
           gender: 'Муж.',
           telephone: '234 234 234',
           snils: '1231 23123 123123'
@@ -75,7 +75,7 @@ export default {
         {
           id: 2,
           fullName: 'Сем семыч',
-          birthDay: '21.05.2000',
+          birthDay: '2023-05-01',
           gender: 'Жен.',
           telephone: '3 213 12',
           snils: '1231 1232 123123'
@@ -83,7 +83,7 @@ export default {
         {
           id: 3,
           fullName: 'Кал калыч',
-          birthDay: '15.05.2000',
+          birthDay: '2023-05-01',
           gender: 'Муж.',
           telephone: '234 234 234',
           snils: '1231 23123 123123'
@@ -91,7 +91,7 @@ export default {
         {
           id: 4,
           fullName: 'Сем семыч',
-          birthDay: '21.05.2000',
+          birthDay: '2023-05-01',
           gender: 'Жен.',
           telephone: '3 213 12',
           snils: '1231 1232 123123'
@@ -99,7 +99,7 @@ export default {
         {
           id: 5,
           fullName: 'Кал калыч',
-          birthDay: '15.05.2000',
+          birthDay: '2023-05-01',
           gender: 'Муж.',
           telephone: '234 234 234',
           snils: '1231 23123 123123'
@@ -107,7 +107,7 @@ export default {
         {
           id: 6,
           fullName: 'Сем семыч',
-          birthDay: '21.05.2000',
+          birthDay: '2023-05-01',
           gender: 'Жен.',
           telephone: '3 213 12',
           snils: '1231 1232 123123'
@@ -120,7 +120,7 @@ export default {
 
     },
     async deletePatient(value) {
-      
+
     }
   }
 }
