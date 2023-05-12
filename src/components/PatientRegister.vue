@@ -67,7 +67,7 @@
           </v-select>
         </v-card-item>
         <v-card-actions>
-          <v-btn border class="grey-darken-1"  @click="register">Регистрация</v-btn>
+          <v-btn border class="grey-darken-1" @click="register" :disabled="isValid">Регистрация</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -130,6 +130,11 @@ export default {
     register() {
       if (this.comment.length === 0)
         return;
+    },
+  },
+  computed: {
+    isValid() {
+      return this.comment.length === 0
     }
   }
 }

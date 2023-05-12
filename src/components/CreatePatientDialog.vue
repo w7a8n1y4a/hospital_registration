@@ -15,16 +15,45 @@
         </v-card-title>
         <v-card-item>
           <v-text-field label="ФИО" v-model="localData.fullName"></v-text-field>
+          <div class="bg-red text-center" v-if="localData.fullName.length === 0">
+            <span>Необходимо заполнить поле</span>
+          </div>
+        </v-card-item>
+        <v-card-item>
+          <v-text-field
+              type="date"
+              label="Дата рождения"
+              v-model="localData.birthDay"
+          >
+          </v-text-field>
+          <div class="bg-red text-center" v-if="!localData.birthDay">
+            <span>Необходимо заполнить поле</span>
+          </div>
+        </v-card-item>
+        <v-card-item>
           <v-select
               label="Гендер"
               v-model="localData.gender"
               :items="['Муж.', 'Жен.', 'Неопределеный']"
           ></v-select>
+          <div class="bg-red text-center" v-if="localData.gender.length === 0">
+            <span>Необходимо заполнить поле</span>
+          </div>
+        </v-card-item>
+        <v-card-item>
           <v-text-field label="Телефон" v-model="localData.telephone"></v-text-field>
+          <div class="bg-red text-center" v-if="localData.telephone.length === 0">
+            <span>Необходимо заполнить поле</span>
+          </div>
+        </v-card-item>
+        <v-card-item>
           <v-text-field label="Снилс" v-model="localData.snils"></v-text-field>
+          <div class="bg-red text-center" v-if="localData.snils.length === 0">
+            <span>Необходимо заполнить поле</span>
+          </div>
         </v-card-item>
         <v-card-actions>
-          <v-btn border @click="createPatient">Создать пациента</v-btn>
+          <v-btn border @click="createPatient" :disabled="NotValid">Создать пациента</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -40,7 +69,7 @@ export default {
       localData: {
         id: '',
         fullName: '',
-        birthDay: '',
+        birthDay: '2000-01-01',
         gender: '',
         telephone: '',
         snils: ''
@@ -49,9 +78,14 @@ export default {
   },
   methods: {
     createPatient() {
-      
+
     }
-  } 
+  },
+  computed: {
+    NotValid() {
+      return this.localData.fullName.length === 0 || !this.localData.birthDay || this.localData.gender === 0 || this.localData.telephone === 0 || this.localData.snils === 0
+    }
+  }
 }
 </script>
 
