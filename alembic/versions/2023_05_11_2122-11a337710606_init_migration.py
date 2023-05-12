@@ -24,18 +24,18 @@ def upgrade() -> None:
     sa.Column('service_type', sqlmodel.sql.sqltypes.AutoString(length=255), nullable=False),
     sa.Column('doctor_name', sqlmodel.sql.sqltypes.AutoString(length=255), nullable=False),
     sa.Column('diagnosis_comment', sqlmodel.sql.sqltypes.AutoString(length=255), nullable=False),
-    sa.Column('date_of_diagnosis', sa.DateTime(), nullable=False),
+    sa.Column('date_of_diagnosis', sa.Date(), nullable=False),
     sa.Column('id_diagnosis_status', sa.Integer(), nullable=False),
     sa.Column('disease_code', sqlmodel.sql.sqltypes.AutoString(length=60), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
-    sa.Column('gender', postgresql.ENUM('MALE', 'FEMALE', name='genders'), nullable=False),
+    sa.Column('gender', postgresql.ENUM('Жен.', 'Муж.', 'Неопределенный', name='genders'), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('first_name', sqlmodel.sql.sqltypes.AutoString(length=255), nullable=False),
     sa.Column('second_name', sqlmodel.sql.sqltypes.AutoString(length=255), nullable=False),
     sa.Column('patronymic', sqlmodel.sql.sqltypes.AutoString(length=255), nullable=False),
-    sa.Column('date_of_birth', sa.DateTime(), nullable=False),
+    sa.Column('date_of_birth', sa.Date(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

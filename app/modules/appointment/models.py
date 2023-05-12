@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 
 from pydantic import BaseModel
 from sqlmodel import SQLModel, Field
@@ -12,7 +12,7 @@ class AppointmentBase(SQLModel):
     service_type: str = Field(max_length=255, nullable=False)
     doctor_name: str = Field(max_length=255, nullable=False)
     diagnosis_comment: str = Field(max_length=255, nullable=False)
-    date_of_diagnosis: datetime = Field(nullable=False)
+    date_of_diagnosis: date = Field(nullable=False)
     id_diagnosis_status: int = Field(nullable=False)
     disease_code: str = Field(max_length=60, nullable=False)
 
@@ -30,7 +30,7 @@ class AppointmentCreate(BaseModel):
     service_type: str
     doctor_name: str
     diagnosis_comment: str
-    date_of_diagnosis: datetime
+    date_of_diagnosis: date
     id_diagnosis_status: int
     disease_code: str
 

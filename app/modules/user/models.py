@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from enum import Enum
 
 from pydantic import BaseModel
@@ -8,7 +8,7 @@ from sqlmodel import SQLModel, Field
 
 from app.modules.user.examples import ex_user_read, ex_user_create
 
-genders = postgres.ENUM("MALE", "FEMALE", name="genders")
+genders = postgres.ENUM("Муж.", "Жен.", name="Неопределенный")
 
 
 @event.listens_for(SQLModel.metadata, "before_create")
@@ -17,8 +17,9 @@ def _create_enums(metadata, conn, **kw):  # noqa: indirect usage
 
 
 class Gender(str, Enum):
-    MALE = "MALE"
-    FEMALE = "FEMALE"
+    MALE = "Муж."
+    FEMALE = "Жен."
+    NEUTRAL = "Неопределенный"
 
 
 class UserBase(SQLModel):
@@ -26,7 +27,7 @@ class UserBase(SQLModel):
     first_name: str = Field(max_length=255, nullable=False)
     second_name: str = Field(max_length=255, nullable=False)
     patronymic: str = Field(max_length=255, nullable=False)
-    date_of_birth: datetime = Field(nullable=False)
+    date_of_birth: date = Field(nullable=False)
     gender: str = Field(sa_column=Column("gender", genders, nullable=False))
 
 
@@ -43,7 +44,7 @@ class UserCreate(BaseModel):
     first_name: str
     second_name: str
     patronymic: str
-    date_of_birth: datetime
+    date_of_birth: date
     gender: str
 
     class Config:
