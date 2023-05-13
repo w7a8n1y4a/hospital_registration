@@ -10,7 +10,7 @@ def get_queue_info(code: int) -> list or str:
     client = zeep.Client(wsdl=wsdl)
 
     credentials = {
-        'Organization': '0011a94b-8906-42ce-8cdf-da1e2dfd487f',
+        'Organization': '5824ffaf-2daf-48c2-8cda-8f02b9bbb9c7',
         'Token': '75f1ab74-7942-41a1-a1d8-b95d53c08216',
     }
 
@@ -48,7 +48,7 @@ def register(data: dict)->dict or None:
     client = zeep.Client(wsdl=wsdl)
 
     credentials = {
-        'Organization': '0011a94b-8906-42ce-8cdf-da1e2dfd487f',
+        'Organization': '5824ffaf-2daf-48c2-8cda-8f02b9bbb9c7',
         'Token': '75f1ab74-7942-41a1-a1d8-b95d53c08216',
     }
 
@@ -193,30 +193,6 @@ def register(data: dict)->dict or None:
 
     except BaseException:
         return None
-
-
-data = {
-    'patient': {'birthdate':'2002-08-01',
-           'family':'test',
-           'given':'test',
-           'middle':'test',
-           'sex':'2',
-           'docnum_pfr':'58495102422',
-           'docnum_polis':'2950430013004022'},
-    'referral': {
-        'type':'1', # тип направления - код
-        'service':'10', # составной профиль помощи - вид помощи нужен код
-        'id':'0',
-        'target':'5824ffaf-2daf-48c2-8cda-8f02b9bbb9c7'},
-    'doctor': {'family':'test',
-          'given':'test',
-          'middle':'test',
-          'sex':'1',
-          'id':'29',
-          'docnum': '05513212414'}
-}
-
-print(register(data))
 
 
 def create_appointment(appointment: Appointment):
