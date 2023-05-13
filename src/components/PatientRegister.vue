@@ -58,8 +58,18 @@
               :items="directionType.directionTypes"
               item-title="display"
               item-value="item_code"
-              label="Код заболевания"
+              label="Тип направления"
               v-model="directionType.item_code"
+          >
+          </v-select>
+        </v-card-item>
+        <v-card-item>
+          <v-select
+              :items="diagnosticStatus.diagnosticStatus"
+              item-title="display"
+              item-value="item_code"
+              label="Статус диагноза"
+              v-model="diagnosticStatus.item_code"
           >
           </v-select>
         </v-card-item>
@@ -86,6 +96,7 @@ import helps from '../jsons/kindOfHelp.json'
 import organizations from '../jsons/organizations.json'
 import diseaseCode from '../jsons/diseaseСode.json'
 import directionType from '../jsons/directionType.json'
+import diagnosticStatus from '../jsons/diagnosisStatus.json'
 
 export default {
   name: "PatientRegister",
@@ -123,6 +134,10 @@ export default {
         diseaseCodes: [],
         item_code: '1'
       },
+      diagnosticStatus: {
+        diagnosticStatus: [],
+        item_code: "1"
+      },
 
       comment: ''
     }
@@ -146,6 +161,11 @@ export default {
     this.diseaseCode.diseaseCodes = diseaseCode.items.slice(0, 100);
     this.diseaseCode.diseaseCodes.forEach(item => {
       item.display = item.attributes.display;
+    })
+
+    this.diagnosticStatus.diagnosticStatus = diagnosticStatus.items.slice(0, 100)
+    this.diagnosticStatus.diagnosticStatus.forEach(item => {
+      item.display = item.attributes.display
     })
   },
   methods: {
