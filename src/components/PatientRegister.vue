@@ -23,6 +23,9 @@
               v-model="helps.item_code"
           >
           </v-select>
+          <div class="bg-red text-center" v-if="!validOrganization">
+            <span>Не удалось найти организации</span>
+          </div>
         </v-card-item>
         <v-card-item>
           <v-select
@@ -84,8 +87,16 @@
           </v-select>
         </v-card-item>
         <v-card-actions>
-          <v-btn border class="grey-darken-1" @click="register" :disabled="isValid">Регистрация</v-btn>
+          <v-btn border class="grey-darken-1" @click="register" :disabled="notValid || !validOrganization">Регистрация
+          </v-btn>
         </v-card-actions>
+        <v-alert
+            v-if="alert"
+            type="info"
+            title="Ответ сервера"
+            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+            variant="tonal"
+        />
       </v-card>
     </v-dialog>
   </div>
@@ -97,12 +108,14 @@ import organizations from '../jsons/organizations.json'
 import diseaseCode from '../jsons/diseaseСode.json'
 import directionType from '../jsons/directionType.json'
 import diagnosticStatus from '../jsons/diagnosisStatus.json'
+import httpService from "@/services/HttpService";
 
 export default {
   name: "PatientRegister",
   data() {
     return {
       dialog: false,
+      alert: false,
       doctors: [
         {
           full_name: 'Родионов Артем Максович'
@@ -118,28 +131,34 @@ export default {
         }
       ],
       selectedDoctor: 'Родионов Артем Максович',
+      //вид помощи
       helps: {
         helps: [],
         item_code: "1",
       },
+      //организация
       organizations: {
         organizations: [],
         item_code: "000252b9-5f04-4f99-bf31-665e4576c38e"
       },
+      //тип направления
       directionType: {
         directionTypes: [],
         item_code: '1'
       },
+      //код болезни
       diseaseCode: {
         diseaseCodes: [],
         item_code: '1'
       },
+      //статус диагноза
       diagnosticStatus: {
         diagnosticStatus: [],
         item_code: "1"
       },
 
-      comment: ''
+      comment: '',
+      validOrganization: true,
     }
   },
   created() {
@@ -148,7 +167,7 @@ export default {
       item.display = item.attributes.display;
     })
 
-    this.organizations.organizations = organizations.items.slice(0, 100)
+    this.organizations.organizations = organizations.items
     this.organizations.organizations.forEach(item => {
       item.display = item.attributes.display;
     })
@@ -172,13 +191,35 @@ export default {
     register() {
       if (this.comment.length === 0)
         return;
+
+      this.alert = true;
     },
   },
   computed: {
-    isValid() {
+    notValid() {
       return this.comment.length === 0
     }
   },
+  watch: {
+    async ['helps.item_code'](value) {
+      const organizationsRequest = await httpService.getOrganizations(value)
+      if (organizationsRequest.length === 0) {
+        this.validOrganization = false
+        return
+      }
+
+      const organizationCodes = organizationsRequest.map(item => item.code)
+      
+      this.organizations.organizations = organizations.items
+      this.organizations.organizations.forEach(item => {
+        item.display = item.attributes.display;
+      })
+      
+      this.organizations.organizations = this.organizations.organizations.filter(o => organizationCodes.includes(o.item_code))
+      this.organizations.item_code = this.organizations.organizations[0].item_code
+      this.validOrganization = true;
+    }
+  }
 }
 </script>
 

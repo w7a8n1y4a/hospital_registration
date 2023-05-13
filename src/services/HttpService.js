@@ -19,6 +19,11 @@ export class HttpService {
     async deletePatient(patientId) {
         return await axios.delete(this.baseUrl + `users?user_id=${patientId}`)
     }
+
+    async getOrganizations(code) {
+        return await axios.get(this.baseUrl + `appointments?code=${code}`)
+            .then(response => response.data)
+    }
 }
 
 export default new HttpService()
