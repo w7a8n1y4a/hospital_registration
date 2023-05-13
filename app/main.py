@@ -12,7 +12,7 @@ app = FastAPI(
     openapi_url=f"{settings.api_v1_prefix}/openapi.json",
     debug=settings.debug
 )
-origins = ['*']
+origins = ['https://test.pepemoss.com']
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
