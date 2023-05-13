@@ -9,7 +9,7 @@ ex_appointment_read = {
 }
 
 ex_appointment_create = {
-    "user_id": "29231000344258",
+    "user_id": "14",
     "direction_type_code": "3",
     "type_of_assistance": "10",
     "target_organization": "0011a94b-8906-42ce-8cdf-da1e2dfd487f",

@@ -1,10 +1,11 @@
 from fastapi import Depends, HTTPException, status
 from sqlmodel import Session
-
+import random
 from app.core.db import get_session
 from app.modules.appointment import api_services
-from app.modules.appointment.api_services import get_queue_info
-from app.modules.appointment.models import Appointment, AppointmentCreate, OrganizationRead
+from app.modules.appointment.api_services import get_queue_info, register
+from app.modules.appointment.models import Appointment, AppointmentCreate, OrganizationRead, AppointmentRead
+from app.modules.user.models import User
 
 
 def get(
@@ -35,16 +36,48 @@ def get(
 def create(
         data: AppointmentCreate,
         db: Session = Depends(get_session)
-) -> Appointment:
-    values = data.dict()
+) -> AppointmentRead:
 
-    appointment = Appointment(**values)
-    db.add(appointment)
+    user = db.get(User, data.user_id)
 
-    # todo: add api call
-    api_services.create_appointment(appointment)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User is not found"
+        )
 
-    db.commit()
-    db.refresh(appointment)
+    family, given, middle = [item for item in data.doctor_name.split(' ')]
 
-    return appointment
+    data = {
+        'patient': {
+            'birthdate': str(user.date_of_birth),
+            'family': user.first_name,
+            'given': user.second_name,
+            'middle': user.patronymic,
+            'sex': '2',
+            'docnum_pfr': user.snils,
+            'docnum_polis': str(random.randint(1000000000000000, 9999999999999999))
+        },
+        'referral': {
+            'type': data.direction_type_code,  # тип направления - код
+            'service': data.type_of_assistance,  # составной профиль помощи - вид помощи нужен код
+            'id': '0',
+            'target': data.target_organization
+        },
+        'doctor': {
+            'family': family,
+            'given': given,
+            'middle': middle,
+            'sex': '1',
+            'id': '290',
+            'docnum': '111111221221'
+        }
+    }
+
+
+    try:
+        key, code = register(data)
+        return AppointmentRead(key=key, code=code)
+    except:
+        return AppointmentRead(key='0', code='0')
+

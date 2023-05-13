@@ -189,11 +189,10 @@ def register(data: dict)->dict or None:
         result['key'] = str(soap_result['IdMq'])
         result['code'] = soap_result['MqReferralStatus']['Code']
 
+        return str(soap_result['IdMq']), soap_result['MqReferralStatus']['Code']
+
     except BaseException:
         return None
-
-
-    return result
 
 
 data = {
