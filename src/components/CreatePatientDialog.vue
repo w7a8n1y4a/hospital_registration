@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import httpService from "@/services/HttpService";
+import snilsService from "@/services/snilsService";
 
 export default {
   name: "CreatePatientDialog",
@@ -77,14 +77,16 @@ export default {
       }
     }
   },
+  mounted() {
+    this.localData.snils = snilsService.snils()
+  },
   methods: {
     async createPatient() {
       if (this.notValid) return
-
       await this.$emit('createPatient', this.localData)
-      
       this.dialog = false;
-    }
+    },
+
   },
   computed: {
     notValid() {

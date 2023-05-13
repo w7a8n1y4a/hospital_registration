@@ -33,6 +33,13 @@
               v-model="organizations.item_code"
           >
           </v-select>
+          <v-select
+              :items="doctors"
+              item-title="full_name"
+              v-model="selectedDoctor"
+              label="ФИО Врача"
+          >
+          </v-select>
         </v-card-item>
         <v-card-item>
           <v-textarea
@@ -85,6 +92,21 @@ export default {
   data() {
     return {
       dialog: false,
+      doctors: [
+        {
+          full_name: 'Родионов Артем Максович'
+        },
+        {
+          full_name: 'Афанасьев Адриан Миронович'
+        },
+        {
+          full_name: 'Зиновьев Иван Проклович'
+        },
+        {
+          full_name: 'Филатов Августин Онисимович'
+        }
+      ],
+      selectedDoctor: 'Родионов Артем Максович',
       helps: {
         helps: [],
         item_code: "1",
