@@ -1,18 +1,17 @@
+ex_organization_read = {
+    "address": "АРХАНГЕЛЬСКАЯ,ОБЛ АРХАНГЕЛЬСК,Г ЛОМОНОСОВА, ПР-КТ ДОМ 271",
+    "code": "0131269c-8e51-4ad8-8144-67aaebeb523b",
+}
+
 ex_appointment_read = {
-    "id": "1",
-    "service_type": "Ампутация головы",
-    "doctor_name": "Помогите Иван Петрович",
-    "diagnosis_comment": "Болен хитростью",
-    "date_of_diagnosis": "2021-09-01",
-    "id_diagnosis_status": "2",
-    "disease_code": "ФО-165739"
+    "key": "29231000344258",
+    "code": "3",
 }
 
 ex_appointment_create = {
-    "service_type": "Ампутация головы",
-    "doctor_name": "Помогите Иван Петрович",
-    "diagnosis_comment": "Болен хитростью",
-    "date_of_diagnosis": "2021-09-01",
-    "id_diagnosis_status": "2",
-    "disease_code": "ФО-165739"
+    "user_id": "29231000344258",
+    "direction_type_code": "3",
+    "type_of_assistance": "10",
+    "target_organization": "0011a94b-8906-42ce-8cdf-da1e2dfd487f",
+    "doctor_name": "Джордан Джостар Джованович",
 }

@@ -3,22 +3,29 @@ from sqlmodel import Session
 
 from app.core.db import get_session
 from app.modules.appointment import api_services
-from app.modules.appointment.models import Appointment, AppointmentCreate
+from app.modules.appointment.api_services import get_queue_info
+from app.modules.appointment.models import Appointment, AppointmentCreate, OrganizationRead
 
 
 def get(
-        user_id: int,
+        code: int,
         db: Session = Depends(get_session)
-) -> Appointment:
-    appointment = db.get(Appointment, user_id)
+) -> list[OrganizationRead]:
 
-    if not appointment:
+    orgs_list = get_queue_info(code)
+    orgs_list_with_type = []
+    for orgs in orgs_list:
+        if orgs['address'] == None:
+            orgs['address'] = 'Нет адреса'
+        orgs_list_with_type.append(OrganizationRead(address=orgs['address'], code=orgs['code']))
+
+    if len(orgs_list_with_type) == 0:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Appointment is not found"
+            detail="Organization is not found"
         )
 
-    return appointment
+    return orgs_list_with_type
 
 
 def create(

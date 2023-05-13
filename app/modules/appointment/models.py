@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from sqlmodel import SQLModel, Field
 
 from app.modules.appointment.examples import ex_appointment_read, \
-    ex_appointment_create
+    ex_appointment_create, ex_organization_read
 
 
 class AppointmentBase(SQLModel):
@@ -21,9 +21,22 @@ class Appointment(AppointmentBase, table=True):
     __tablename__ = "appointments"
 
 
-class AppointmentRead(AppointmentBase):
+class OrganizationRead(BaseModel):
+
+    address: str
+    code: str
+
     class Config:
-        schema_extra = {"example": ex_appointment_read}
+        schema_extra = {"example": ex_organization_read}
+
+
+class AppointmentRead(BaseModel):
+
+    address: str
+    code: str
+
+    class Config:
+        schema_extra = {"example": ex_organization_read}
 
 
 class AppointmentCreate(BaseModel):

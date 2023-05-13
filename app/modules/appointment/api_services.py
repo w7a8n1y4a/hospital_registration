@@ -5,7 +5,7 @@ from app import settings
 from app.modules.appointment.models import Appointment
 
 
-def get_queue_info(code: str) -> list or str:
+def get_queue_info(code: int) -> list or str:
     wsdl = 'http://r29-rc.zdrav.netrika.ru/queues/MqService.svc?wsdl'
     client = zeep.Client(wsdl=wsdl)
 
@@ -16,7 +16,7 @@ def get_queue_info(code: str) -> list or str:
 
     options = {
         'ReferralInfo': {
-            'ProfileMedService': {'Code': code, 'System': 'urn:oid:1.2.643.2.69.1.1.1.56', 'Version': '1'}
+            'ProfileMedService': {'Code': str(code), 'System': 'urn:oid:1.2.643.2.69.1.1.1.56', 'Version': '1'}
         },
         'Target': {'Lpu': None},
     }
@@ -30,7 +30,7 @@ def get_queue_info(code: str) -> list or str:
     data_list = json['ActiveProfiles']['ActiveProfile']
     for orgs in data_list:
         if 'TargetLpu' in orgs:
-            orgs_list.append({orgs['Address']: orgs['TargetLpu']['Code']})
+            orgs_list.append({'address': orgs['Address'],  'code': orgs['TargetLpu']['Code']})
 
     return orgs_list
 
@@ -200,10 +200,11 @@ data = {
            'sex':'2',
            'docnum_pfr':'58495102422',
            'docnum_polis':'2950430013004022'},
-    'referral': {'type':'1',
-            'service':'10',
-            'id':'0',
-            'target':'5824ffaf-2daf-48c2-8cda-8f02b9bbb9c7'},
+    'referral': {
+        'type':'1', # тип направления - код
+        'service':'10', # составной профиль помощи - вид помощи нужен код
+        'id':'0',
+        'target':'5824ffaf-2daf-48c2-8cda-8f02b9bbb9c7'},
     'doctor': {'family':'test',
           'given':'test',
           'middle':'test',
