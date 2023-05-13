@@ -32,20 +32,20 @@ class OrganizationRead(BaseModel):
 
 class AppointmentRead(BaseModel):
 
-    address: str
+    key: str
     code: str
 
     class Config:
-        schema_extra = {"example": ex_organization_read}
+        schema_extra = {"example": ex_appointment_read}
 
 
 class AppointmentCreate(BaseModel):
-    service_type: str
+
+    user_id: str
+    direction_type_code: str
+    type_of_assistance: str
+    target_organization: str
     doctor_name: str
-    diagnosis_comment: str
-    date_of_diagnosis: date
-    id_diagnosis_status: int
-    disease_code: str
 
     class Config:
         use_enum_values = True

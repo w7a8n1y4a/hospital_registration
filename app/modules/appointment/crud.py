@@ -37,6 +37,7 @@ def create(
         db: Session = Depends(get_session)
 ) -> Appointment:
     values = data.dict()
+
     appointment = Appointment(**values)
     db.add(appointment)
 
