@@ -46,7 +46,7 @@
         <td class="text-left" style="display: flex">
           <patient-delete :id="item.id" @deletePatient="deletePatient"/>
           <patient-redact :patient="item" @updatePatient="updatePatient"/>
-          <patient-register/>
+          <patient-register :userId="item.id"/>
         </td>
       </tr>
       </tbody>

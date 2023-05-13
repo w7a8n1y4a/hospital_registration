@@ -12,7 +12,7 @@
 
       <v-card>
         <v-card-title>
-          Регистрация пациента
+          Регистрация пациента {{ isLoad ? 'Загрузка...' : '' }}
         </v-card-title>
         <v-card-item>
           <v-select
@@ -90,13 +90,6 @@
           <v-btn border class="grey-darken-1" @click="register" :disabled="notValid || !validOrganization">Регистрация
           </v-btn>
         </v-card-actions>
-        <v-alert
-            v-if="alert"
-            type="info"
-            title="Ответ сервера"
-            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
-            variant="tonal"
-        />
       </v-card>
     </v-dialog>
   </div>
@@ -112,10 +105,15 @@ import httpService from "@/services/HttpService";
 
 export default {
   name: "PatientRegister",
+  props: {
+    userId: Number
+  },
   data() {
     return {
       dialog: false,
-      alert: false,
+      isLoad: false,
+      errorResult: '',
+      responseRegister: null,
       doctors: [
         {
           full_name: 'Родионов Артем Максович'
@@ -134,12 +132,12 @@ export default {
       //вид помощи
       helps: {
         helps: [],
-        item_code: "1",
+        item_code: "10",
       },
       //организация
       organizations: {
         organizations: [],
-        item_code: "000252b9-5f04-4f99-bf31-665e4576c38e"
+        item_code: "5824ffaf-2daf-48c2-8cda-8f02b9bbb9c7"
       },
       //тип направления
       directionType: {
@@ -172,28 +170,57 @@ export default {
       item.display = item.attributes.display;
     })
 
-    this.directionType.directionTypes = directionType.items.slice(0, 100)
+    this.directionType.directionTypes = directionType.items
     this.directionType.directionTypes.forEach(item => {
       item.display = item.attributes.display;
     })
 
-    this.diseaseCode.diseaseCodes = diseaseCode.items.slice(0, 100);
+    this.diseaseCode.diseaseCodes = diseaseCode.items;
     this.diseaseCode.diseaseCodes.forEach(item => {
       item.display = item.attributes.display;
     })
 
-    this.diagnosticStatus.diagnosticStatus = diagnosticStatus.items.slice(0, 100)
+    this.diagnosticStatus.diagnosticStatus = diagnosticStatus.items
     this.diagnosticStatus.diagnosticStatus.forEach(item => {
       item.display = item.attributes.display
     })
   },
+  async mounted() {
+    await this.updateOrganization()
+  },
   methods: {
-    register() {
-      if (this.comment.length === 0)
-        return;
+    async register() {
+      this.isLoad = true
+      await httpService.sendAppointment(this.userId, this.directionType.item_code, this.helps.item_code, this.organizations.item_code, this.selectedDoctor)
+          .then(response => {
+            alert(`code: ${response.data.code} key: ${response.data.key}`)
+          })
+          .catch(e => this.errorResult = e.message)
 
+      this.isLoad = false
       this.alert = true;
     },
+    async updateOrganization() {
+      this.isLoad = true
+      const organizationsRequest = await httpService.getOrganizations(this.helps.item_code)
+      if (organizationsRequest.length === 0) {
+        this.validOrganization = false
+        this.isLoad = false
+        return
+      }
+
+      const organizationCodes = organizationsRequest.map(item => item.code)
+
+      this.organizations.organizations = organizations.items
+      this.organizations.organizations.forEach(item => {
+        item.display = item.attributes.display;
+      })
+
+      this.organizations.organizations = this.organizations.organizations.filter(o => organizationCodes.includes(o.item_code))
+      this.organizations.item_code = this.organizations.organizations[0].item_code
+      this.validOrganization = true;
+      this.isLoad = false;
+    }
   },
   computed: {
     notValid() {
@@ -201,23 +228,8 @@ export default {
     }
   },
   watch: {
-    async ['helps.item_code'](value) {
-      const organizationsRequest = await httpService.getOrganizations(value)
-      if (organizationsRequest.length === 0) {
-        this.validOrganization = false
-        return
-      }
-
-      const organizationCodes = organizationsRequest.map(item => item.code)
-      
-      this.organizations.organizations = organizations.items
-      this.organizations.organizations.forEach(item => {
-        item.display = item.attributes.display;
-      })
-      
-      this.organizations.organizations = this.organizations.organizations.filter(o => organizationCodes.includes(o.item_code))
-      this.organizations.item_code = this.organizations.organizations[0].item_code
-      this.validOrganization = true;
+    async ['helps.item_code']() {
+      await this.updateOrganization()
     }
   }
 }

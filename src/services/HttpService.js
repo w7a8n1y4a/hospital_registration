@@ -24,6 +24,16 @@ export class HttpService {
         return await axios.get(this.baseUrl + `appointments?code=${code}`)
             .then(response => response.data)
     }
+    
+    sendAppointment(user_id, direction_type_code, type_of_assistance, target_organization, doctor_name) {
+        return axios.post(this.baseUrl + `appointments`, {
+            user_id,
+            direction_type_code,
+            type_of_assistance,
+            target_organization,
+            doctor_name
+        })
+    }
 }
 
 export default new HttpService()
