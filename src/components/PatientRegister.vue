@@ -160,27 +160,27 @@ export default {
     }
   },
   created() {
-    this.helps.helps = helps.items.slice(0, 100);
+    this.helps.helps = helps.items.slice(0, 500);
     this.helps.helps.forEach(item => {
       item.display = item.attributes.display;
     })
 
-    this.organizations.organizations = organizations.items
+    this.organizations.organizations = organizations.items.slice(0, 500)
     this.organizations.organizations.forEach(item => {
       item.display = item.attributes.display;
     })
 
-    this.directionType.directionTypes = directionType.items
+    this.directionType.directionTypes = directionType.items.slice(0, 500)
     this.directionType.directionTypes.forEach(item => {
       item.display = item.attributes.display;
     })
 
-    this.diseaseCode.diseaseCodes = diseaseCode.items;
+    this.diseaseCode.diseaseCodes = diseaseCode.items.slice(0, 500);
     this.diseaseCode.diseaseCodes.forEach(item => {
       item.display = item.attributes.display;
     })
 
-    this.diagnosticStatus.diagnosticStatus = diagnosticStatus.items
+    this.diagnosticStatus.diagnosticStatus = diagnosticStatus.items.slice(0, 500)
     this.diagnosticStatus.diagnosticStatus.forEach(item => {
       item.display = item.attributes.display
     })
