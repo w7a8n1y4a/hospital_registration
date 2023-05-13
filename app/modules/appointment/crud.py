@@ -13,6 +13,10 @@ def get(
 ) -> list[OrganizationRead]:
 
     orgs_list = get_queue_info(code)
+
+    if orgs_list == None:
+        return []
+
     orgs_list_with_type = []
     for orgs in orgs_list:
         if orgs['address'] == None:

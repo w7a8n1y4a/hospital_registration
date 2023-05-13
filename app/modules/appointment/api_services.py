@@ -21,7 +21,11 @@ def get_queue_info(code: int) -> list or str:
         'Target': {'Lpu': None},
     }
 
-    soap_result = client.service.GetQueueInfo(credentials, options)
+    try:
+        soap_result = client.service.GetQueueInfo(credentials, options)
+    except:
+        return None
+
     if soap_result.ActiveProfiles == None:
         return None
 
